@@ -273,7 +273,7 @@ function elegirAviso(d, listos, siguiente, confirmado, pendiente) {
   if (dias !== null && dias >= DIAS_INACTIVIDAD) return { icono: 'reloj', titulo: 'Te echamos de menos',
     texto: `Hace ${dias} días que no te vemos. ¿Preparamos algo bonito?` };
   if (!leer(CLAVE_BIENVENIDA)) return { icono: 'hola', titulo: '¡Te damos la bienvenida!', cerrable: true,
-    texto: 'Cada compra en ImpresionA te da <b>sellos</b>. Júntalos y cámbialos por <b>premios</b>. Y cuanto más compras, más sube tu <b>nivel</b>.' };
+    texto: 'Cada compra en ImpresionA te da <b>sellos</b>, y cada <b>medalla</b> uno más. Júntalos y cámbialos por <b>premios</b>. Y cuanto más compras, más sube tu <b>nivel</b>.' };
   return null;
 }
 
@@ -408,7 +408,7 @@ function pintarLogros(hitos, logros) {
       ${esc(m.nombre)}${m.ganado && m.ganado.fecha ? `<span class="medalla-fecha">${fechaCorta(m.ganado.fecha)}</span>` : ''}
     </button>`).join('')}</div>
     <div class="logro-detalle" id="logro-detalle" aria-live="polite" hidden></div>
-    <p class="nota">Toca una medalla para ver cómo conseguirla.</p>`;
+    <p class="nota">Cada medalla te da 1 sello. Toca una para ver cómo conseguirla.</p>`;
 }
 
 // Al tocar una medalla se muestra debajo qué hay que hacer para conseguirla (otro toque la cierra)
@@ -424,8 +424,8 @@ function mostrarLogro(boton) {
   boton.setAttribute('aria-expanded', 'true');
   const requisito = m.desc ? esc(m.desc) : 'Un logro especial de ImpresionA.';
   const estado = m.ganado
-    ? '¡Conseguido' + (m.ganado.fecha ? ' el ' + fechaCorta(m.ganado.fecha) : '') + '!'
-    : 'Aún no lo tienes. ¡A por él!';
+    ? '¡Conseguido' + (m.ganado.fecha ? ' el ' + fechaCorta(m.ganado.fecha) : '') + '! Ya sumó 1 sello a tu tarjeta.'
+    : 'Aún no lo tienes. Al conseguirlo ganas 1 sello. ¡A por él!';
   caja.className = 'logro-detalle' + (m.ganado ? ' ganado' : '');
   caja.innerHTML = `<div class="logro-titulo">${esc(m.nombre)}</div>
     <div class="logro-requisito"><b>Cómo conseguirlo:</b> ${requisito}</div>
